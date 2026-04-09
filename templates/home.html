@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ratio Calculator</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #222;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .phone {
+            width: 420px;
+            height: 700px;
+            background: black;
+            border-radius: 40px;
+            padding: 15px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.6);
+            position: relative;
+        }
+
+        .screen {
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            height: 100%;
+            border-radius: 30px;
+            padding: 20px;
+            color: white;
+        }
+        .notch {
+            width: 120px;
+            height: 20px;
+            background: black;
+            border-radius: 10px;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .title {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .card-box {
+            background: white;
+            color: black;
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bolder;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="phone">
+
+    <div class="notch"></div>
+
+    <div class="screen">
+
+        <h4 class="title">Ratio Calculator</h4>
+
+        <div class="card-box">
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <input type="number" name="num1" class="form-control" placeholder="First number" required>
+                </div>
+
+                <div class="mb-3">
+                    <input type="number" name="num2" class="form-control" placeholder="Second number" required>
+                </div>
+
+                <button class="btn btn-primary w-100">Calculate</button>
+            </form>
+
+            {% if res %}
+                <div class="result">
+                    Simplified Ratio : {{ res }}
+                </div>
+                <div class="mt-4 p-3 bg-light rounded">
+
+        <h6>Formula Used: Ratio = num1 : num2</h6>
+
+        <p>The GCD of {{snum1 }} and {{ num2 }}:
+            GCD({{ num1 }}, {{ num2 }}) = {{ gcd }}
+        </p>
+        <p>Divide both numbers by the GCD:</p>
+        <ul>
+            <li>{{ num1 }} / {{ gcd }} = {{ snum1 }}</li>
+            <li>{{ num2 }} / {{ gcd }} = {{ snum2 }}</li>
+        </ul>
+        <p>
+            Therefore, the ratio is 
+            {{ snum1 }} : {{ snum2 }}
+        </p>
+
+    </div>
+            {% endif %}
+
+        </div>
+            
+    </div>
+
+</div>
+
+</body>
+</html>
